@@ -1,0 +1,43 @@
+{
+  "name": "cgol-demo",
+  "version": "0.1.0",
+  "description": "Conway's game of life demo",
+  "main": "index.js",
+  "bin": {
+    "create-wasm-app": ".bin/create-wasm-app.js"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rustwasm/create-wasm-app.git"
+  },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "rust",
+    "webpack"
+  ],
+  "author": "Guanzhou Hu <huguanzhou123@gmail.com>",
+  "license": "(MIT OR Apache-2.0)",
+  "bugs": {
+    "url": "https://github.com/josehu07/bitaggy/issues"
+  },
+  "homepage": "https://josehu.com/apps/cgol-demo",
+  "dependenciesComments": {
+    "bitaggy": "^0.1.0"
+  },
+  "dependencies": {
+    "bitaggy": "file:../pkg",
+    "bootstrap": "^5.2.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.0",
+    "hello-wasm-pack": "^0.1.0",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
