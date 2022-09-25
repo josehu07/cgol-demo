@@ -3,5 +3,6 @@
 Cargo.lock
 bin/
 pkg/
-www/
+www/node_modules/
+www/dist
 wasm-pack.log

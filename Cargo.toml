@@ -24,6 +24,16 @@ console_error_panic_hook = { version = "0.1.7", optional = true }
 # allocator, however.
 wee_alloc = { version = "0.4.5", optional = true }
 
+# JavaScript & web system functions.
+js-sys = "0.3.60"
+
+# Bitset container type.
+fixedbitset = "0.4.2"
+
+[dependencies.web-sys]
+version = "0.3.60"
+features = ["console"]
+
 [dev-dependencies]
 wasm-bindgen-test = "0.3.33"
 
