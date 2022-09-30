@@ -6,32 +6,41 @@
     <meta name="author" content="Guanzhou Hu">
 
     <title>Bitaggy - Lightweight CS Bibliography Manager</title>
-    <link rel="icon" type="image/x-icon" href="/imgs/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/imgs/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/imgs/favicon-16x16.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon-16x16.png">
     
     <style>
       body {
         padding-top: 4.5rem;
         font-family: "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
       }
+
+      .has-transition {
+        transition: all 1.5s;
+        transition-delay: 0.2s;
+      }
     </style>
 
   </head>
 
   <body>
-    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
-    
+    <noscript>This page contains WebAssembly and JavaScript content, please enable them in your browser.</noscript>
+
     <!--
       Header navigation bar.
     -->
     <nav class="navbar navbar-expand navbar-dark fixed-top py-0" style="background-color: #555555;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand me-auto" href="#">
           <img src="imgs/bitaggy.svg" alt="Logo" height="24" class="d-inline-block">
           Bitaggy
         </a>
+        <div class="navbar-text pe-2">
+          <img src="imgs/dropbox-white.svg" id="indicator-dropbox" class="d-none" alt="Dropbox" height="20">
+          <img src="imgs/google-drive-white.svg" id="indicator-google-drive" class="d-none" alt="Google Drive" height="20">
+        </div>
+        <span id="indicator-username" class="navbar-text pe-3 invisible has-transition" style="color: #eeeeee;"></span>
         <a class="navbar-text" href="https://github.com/josehu07/bitaggy" target="_blank">
           <img src="imgs/github.svg" alt="GitHub" height="24" class="d-inline-block">
         </a>
@@ -47,28 +56,55 @@
       -->
       <div class="d-inline-flex justify-content-center pb-2">
         <img src="imgs/storage.svg" class="pe-2" alt="Backend" height="24">
-        <h5 class="d-inline-block">Select your storage backend...</h5>
+        <h5 class="d-inline-block">Login your storage backend...</h5>
       </div>
       <!--
         List supported backends.
       -->
-      <div class="container-fluid list-group" style="width:220px;">
-        <button type="button" class="list-group-item list-group-item-action">
+      <div class="container-fluid list-group" style="width: 300px;">
+        <button type="button" id="login-button-dropbox" class="list-group-item list-group-item-action">
           <div class="row g-0">
-            <span class="col-2"><img src="imgs/dropbox.svg" alt="Dropbox" height="24"></span>
+            <span class="col-1"><img src="imgs/dropbox.svg" alt="Dropbox" height="24"></span>
             <span class="col-10">Dropbox</span>
+            <div class="col-1 d-flex justify-content-center align-items-center">
+              <div id="login-button-dropbox-spinner" class="spinner-border spinner-border-sm d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <img src="imgs/checkmark.svg" id="login-button-dropbox-checkmark" class="d-none" alt="Checkmark" height="24">
+              <img src="imgs/crossmark.svg" id="login-button-dropbox-crossmark" class="d-none" alt="Crossmark" height="24">
+            </div>
           </div>
         </button>
-        <button type="button" class="list-group-item list-group-item-action" disabled>
+        <button type="button" id="login-button-google-drive" class="list-group-item list-group-item-action" disabled>
           <div class="row g-0">
-            <span class="col-2"><img src="imgs/google-drive.svg" alt="Google Drive" height="24"></span>
+            <span class="col-1"><img src="imgs/google-drive.svg" alt="Google Drive" height="24"></span>
             <span class="col-10">Google Drive</span>
+            <div class="col-1 d-flex justify-content-center align-items-center">
+              <div id="login-button-google-drive-spinner" class="spinner-border spinner-border-sm d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <img src="imgs/checkmark.svg" id="login-button-google-drive-checkmark" class="d-none" alt="Checkmark" height="24">
+              <img src="imgs/crossmark.svg" id="login-button-google-drive-crossmark" class="d-none" alt="Crossmark" height="24">
+            </div>
           </div>
         </button>
       </div>
+
+      <!--
+        Group toolbar text row.
+      -->
+      <div class="d-inline-flex justify-content-center pt-4 pb-2">
+        <img src="imgs/collection.svg" class="pe-2" alt="Group" height="24">
+        <h5 class="d-inline-block">Select or create a bibgroup...</h5>
+      </div>
+      <!--
+        Current groups list.
+      -->
+      <div id="groups-list" class="container-fluid list-group" style="width: 300px;">
+        <!--filled by JS-->
+      </div>
     </main>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <script src="./bootstrap.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
