@@ -31,7 +31,8 @@
     "@popperjs/core": "^2.11.6",
     "bitaggy": "file:../pkg",
     "bootstrap": "^5.2.1",
-    "dropbox": "^10.32.0"
+    "dropbox": "^10.32.0",
+    "valid-filename": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

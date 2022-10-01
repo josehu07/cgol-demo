@@ -5,9 +5,9 @@ Lightweight bibliography manager for CS papers.
 
 ## TODO List
 
-- [ ] async waiting circle animation
-- [ ] navbar storage login info & anim
-- [ ] group list loading & anim
+- [x] async waiting circle animation
+- [x] navbar storage login info
+- [x] group list loading & toolbars
 - [ ] main papers page outline
 - [ ] storage layout structure design
 - [ ] adding a new paper entry
@@ -17,3 +17,4 @@ Lightweight bibliography manager for CS papers.
 - [ ] keyword searching support
 - [ ] Dropbox API + OAuth
 - [ ] Google Drive API + OAuth
+- [ ] nice animations on show/hide

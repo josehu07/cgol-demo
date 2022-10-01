@@ -15,11 +15,6 @@
         padding-top: 4.5rem;
         font-family: "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
       }
-
-      .has-transition {
-        transition: all 1.5s;
-        transition-delay: 0.2s;
-      }
     </style>
 
   </head>
@@ -40,7 +35,7 @@
           <img src="imgs/dropbox-white.svg" id="indicator-dropbox" class="d-none" alt="Dropbox" height="20">
           <img src="imgs/google-drive-white.svg" id="indicator-google-drive" class="d-none" alt="Google Drive" height="20">
         </div>
-        <span id="indicator-username" class="navbar-text pe-3 invisible has-transition" style="color: #eeeeee;"></span>
+        <span id="indicator-username" class="navbar-text pe-3 invisible" style="color: #eeeeee;"></span>
         <a class="navbar-text" href="https://github.com/josehu07/bitaggy" target="_blank">
           <img src="imgs/github.svg" alt="GitHub" height="24" class="d-inline-block">
         </a>
@@ -61,11 +56,11 @@
       <!--
         List supported backends.
       -->
-      <div class="container-fluid list-group" style="width: 300px;">
+      <div class="container-fluid list-group" style="max-width: 300px;">
         <button type="button" id="login-button-dropbox" class="list-group-item list-group-item-action">
           <div class="row g-0">
-            <span class="col-1"><img src="imgs/dropbox.svg" alt="Dropbox" height="24"></span>
-            <span class="col-10">Dropbox</span>
+            <span class="col-2"><img src="imgs/dropbox.svg" alt="Dropbox" height="24"></span>
+            <span class="col-9">Dropbox</span>
             <div class="col-1 d-flex justify-content-center align-items-center">
               <div id="login-button-dropbox-spinner" class="spinner-border spinner-border-sm d-none" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -77,8 +72,8 @@
         </button>
         <button type="button" id="login-button-google-drive" class="list-group-item list-group-item-action" disabled>
           <div class="row g-0">
-            <span class="col-1"><img src="imgs/google-drive.svg" alt="Google Drive" height="24"></span>
-            <span class="col-10">Google Drive</span>
+            <span class="col-2"><img src="imgs/google-drive.svg" alt="Google Drive" height="24"></span>
+            <span class="col-9">Google Drive</span>
             <div class="col-1 d-flex justify-content-center align-items-center">
               <div id="login-button-google-drive-spinner" class="spinner-border spinner-border-sm d-none" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -93,17 +88,93 @@
       <!--
         Group toolbar text row.
       -->
-      <div class="d-inline-flex justify-content-center pt-4 pb-2">
+      <div id="groups-list-title" class="d-inline-flex justify-content-center pt-4 mt-1 pb-2 invisible">
         <img src="imgs/collection.svg" class="pe-2" alt="Group" height="24">
         <h5 class="d-inline-block">Select or create a bibgroup...</h5>
       </div>
       <!--
         Current groups list.
       -->
-      <div id="groups-list" class="container-fluid list-group" style="width: 300px;">
+      <div id="groups-list" class="container-fluid list-group invisible" style="max-width: 300px;">
         <!--filled by JS-->
       </div>
     </main>
+
+    <!--
+      Modals.
+    -->
+    <!--
+      Group deletion modal.
+    -->
+    <div id="group-delete-modal" class="modal fade" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Deleting Group</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div id="group-delete-message" class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="group-delete-confirm" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+      Group renaming modal.
+    -->
+    <div id="group-edit-modal" class="modal fade" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Renaming Group</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body container-fluid">
+            <span id="group-edit-message"></span>
+            <div class="pt-2 pb-3">
+              <input type="text" id="group-edit-input" autocomplete="off" class="form-control">
+            </div>
+            <span class="form-text">
+              Note: DropBox currently does not accept duplicate names where only cases are different.
+            </span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="group-edit-submit" class="btn btn-primary" data-bs-dismiss="modal">Rename</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+      Group creation modal.
+    -->
+    <div id="group-create-modal" class="modal fade" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Creating Group</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body container-fluid">
+            <span id="group-create-message">
+              Creating new group with name:
+            </span>
+            <div class="pt-2 pb-3">
+              <input type="text" id="group-create-input" autocomplete="off" class="form-control">
+            </div>
+            <span class="form-text">
+              Note: DropBox currently does not accept duplicate names where only cases are different.
+            </span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="group-create-submit" class="btn btn-primary" data-bs-dismiss="modal">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <script type="module" src="./index.js"></script>
   </body>
