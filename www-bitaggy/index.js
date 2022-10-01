@@ -398,7 +398,7 @@ loginButtonDropbox.addEventListener("click", () => {
         }
         
         // perform login procedure
-        let accessToken = "sl.BQQj5tDVyKuvlz-RH4TRmxAykskmuoa4q7wboePNvDcNHQRXwgWKw9CPde_B5bHbRRRpYBrF3-_ysQhjVWcgfPvdp7SK4wYDs7N5WZjuxZVGo2jtOOzSOaY0GEJPEfNzlH1bJP2nugo";
+        let accessToken = "garbage";
         loginProcedure("dropbox", backendDropbox, accessToken);
 
         // re-enable button clicking
